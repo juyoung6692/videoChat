@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Or Join Meeting</title>
+    <link rel="stylesheet" href="/public/Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/public/Assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            // 새로운 방 만들기
+            $(".new-meeting").on("click", function(){
+                var newID = Math.floor(Math.random()*100000000)
+                var meetingURL = window.location.origin+"?meetingID="+newID;
+                    window.location.replace(meetingURL)
+            })
+
+            //만들어진 방에 참여하기
+            $(".join-action").on("click", function() {
+                var meetingID = $(".enter-code").val();
+                if(meetingID.length<1){
+                    alert("Enter a code");
+                    $(".enter-code").focus();
+                }else{
+                    var meetingURL = window.location.origin+"?meetingID="+meetingID;
+                    window.location.replace(meetingURL)
+                }
+            })
+        })
+    </script>
+</head>
+<body style="padding-top: 3.5rem;">
+    <nav class="navbar navbar-expand-md fixed-top">
+        <img src="../public/assets/images/google-meet-icon.png" class="logo" alt="">
+        <a href="#" class="navbar-brand text-dark">VideoChat</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav mr-0">
+                <li class="nav-item">
+                    <button class="btn btn-outline-secondary btn-lg font-weight-bold sign-in" >Sign In</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-secondary btn-lg font-weight-bold sign-up">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="jumbotron h-100 d-flex">
+            <div class="display-center container w-50">
+                <ul class="display-center justify-content-start" >
+                    <li style="padding: 0;">
+                        <button class="btn btn-lg text-light font-weight-bold display-center new-meeting" style="background-color: #01796b;"><span class="material-icons mr-2">video_call</span>New Meeting</button>
+                    </li>
+                    <li class="pl-3">
+                        <button class="btn btn-lg btn-outline-secondary text-dark font-weight-bold display-center" style="background-color: #ffffff;"><span class="material-icons mr-2">keyboard</span><input type="text" placeholder="Enter a code" style="border: none;" class="enter-code"></button>
+                    </li>
+                    <li class="text-dark font-weight-bold cursor-pointer pl-2 join-action">Join</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer class="container display-center"><h6>Learn more about <span class="learn-more text-info">video chat</span> .</h6></footer>
+</body>
+</html>
